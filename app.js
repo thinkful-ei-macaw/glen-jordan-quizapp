@@ -6,28 +6,29 @@ const store = {
   questions: [
     {
       question: 'What color is broccoli?',
-      answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
-      ],
+      answers: ['red', 'orange', 'pink', 'green'],
       correctAnswer: 'green'
     },
     {
       question: 'What is the current year?',
-      answers: [
-        '1970',
-        '2015',
-        '2019',
-        '2005'
-      ],
+      answers: ['1970', '2015', '2019', '2005'],
       correctAnswer: '2019'
     }
   ],
   questionNumber: 0,
   score: 0
 };
+
+$('main').html(`
+<h1>THE RICK AND MORTY QUIZ</h1>
+<div class="intro-page">
+
+<img class="circle" src="https://globalcomment.com/wp-content/uploads/2016/03/rickandmorty.jpg" />
+
+</div>
+
+<button>GET SCHWIFTY</button>
+`);
 
 /**
  *

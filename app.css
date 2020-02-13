@@ -6,3 +6,13 @@
   * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
   *
 */
+
+.intro-page {
+  display: flex;
+  justify-content: center;
+}
+
+.circle {
+  border-radius: 50%;
+  border: 11px solid black;
+}
