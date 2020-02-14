@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable strict */
 /**
  * Example store structure
  */
@@ -16,19 +18,78 @@ const store = {
     }
   ],
   questionNumber: 0,
-  score: 0
+  score: 0,
+  quizStart: false
 };
 
-$('main').html(`
-<h1>THE RICK AND MORTY QUIZ</h1>
-<div class="intro-page">
+function clickMe() {
+  $('#js-start-btn').click(function() {
+    $(location).attr('href', renderQuestion);
+  });
+}
 
-<img class="circle" src="https://globalcomment.com/wp-content/uploads/2016/03/rickandmorty.jpg" />
+function questions() {
+  const questionArr = store['questions'];
+  console.log(questionArr);
+  let currentQuestion = questionArr[store.questionNumber];
+  console.log(currentQuestion);
+  return currentQuestion;
+}
+
+function renderQuestion() {
+  let data = questions();
+  $('main').html(
+    `<section>${data.question}</section>
+      
+      ${data.answers
+        .map(e => {
+          return `<ul>
+          <li class="choose">${e}</li>  
+        </ul>`;
+        })
+        .join('')}`
+  );
+}
+
+function liClick() {
+  $('.choose').on('click', function() {
+    alert('HEY');
+  });
+}
+
+function renderFirstPage() {
+  $('main').html(`
+
+<header id="rick-intro">
+
+<h1>THE RICK AND MORTY QUIZ</h1>
+
+</header>
+
+<div id="intro-page">
+
+<img class="circle" src=https://media0.giphy.com/media/OFbrZqxNMu7Ic/giphy.webp?cid=790b7611ebb9f60c4e01f9c285354c380cf85dadcbefabed&rid=giphy.webp />
 
 </div>
 
-<button>GET SCHWIFTY</button>
+<div id="intro-info">
+<h3>
+It’s time to do some Rick and Morty trivia and only the Rickest of Ricks will be able to pass.
+</h3>
+</div>
+
+<div id="schwift">
+
+<button id="js-start-btn">GET SCHWIFTY</button>
+
+</div>
+
 `);
+}
+
+$(renderFirstPage);
+$(clickMe);
+$(liClick);
 
 /**
  *
@@ -42,3 +103,26 @@ $('main').html(`
  * You may add attributes (classes, ids, etc) to the existing HTML elements, or link stylesheets or additional scripts if necessary
  *
  */
+// {
+//   <section class='questionScreen'>
+//     <form class='questionForm'>
+//       <fieldset class='radio'>
+//         <legend>${data.question}</legend>$
+//         {data.answers
+//           .map(answer => {
+//             return `<label>
+// 				<input type="radio" value="${answer}" name="answer" required>
+// 				${answer}
+//       </label>`;
+//           })
+//           .join('')}
+//       </fieldset>
+//       <button type='submit'>Submit</button>
+//     </form>
+//   </section>;
+
+// $('form').submit(function(e) {
+//   e.preventDefault();
+//   nextQuestion();
+// });
+// }
