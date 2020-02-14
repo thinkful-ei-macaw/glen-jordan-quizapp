@@ -19,6 +19,7 @@ const store = {
   ],
   questionNumber: 0,
   score: 0,
+  wrong: 0,
   quizStart: false
 };
 
@@ -40,20 +41,28 @@ function renderQuestion() {
   let data = questions();
   $('main').html(
     `<section>${data.question}</section>
-      
+    <form>  
       ${data.answers
-        .map(e => {
-          return `<ul>
-          <li class="choose">${e}</li>  
-        </ul>`;
+        .map((e, index) => {
+          return `<input id="answer${index}" name="questionDisplay" type="radio" value="${e}">
+          <label for="answer${index}">${e}</label>`;
         })
-        .join('')}`
+        .join('')}
+        <button type="submit">Submit</button>
+    </form>`
   );
-}
 
-function liClick() {
-  $('.choose').on('click', function() {
-    alert('HEY');
+  $('form').submit(function(e) {
+    e.preventDefault();
+    if ($('input:checked').val() === data.correctAnswer) {
+      store.score += 1;
+    } else {
+      store.wrong += 1;
+    }
+    store.questionNumber += 1;
+    renderQuestion();
+    console.log(`correct answer ${store.score}`);
+    console.log(`wrong answer ${store.wrong}`);
   });
 }
 
@@ -89,7 +98,6 @@ It’s time to do some Rick and Morty trivia and only the Rickest of Ricks will 
 
 $(renderFirstPage);
 $(clickMe);
-$(liClick);
 
 /**
  *
@@ -103,26 +111,3 @@ $(liClick);
  * You may add attributes (classes, ids, etc) to the existing HTML elements, or link stylesheets or additional scripts if necessary
  *
  */
-// {
-//   <section class='questionScreen'>
-//     <form class='questionForm'>
-//       <fieldset class='radio'>
-//         <legend>${data.question}</legend>$
-//         {data.answers
-//           .map(answer => {
-//             return `<label>
-// 				<input type="radio" value="${answer}" name="answer" required>
-// 				${answer}
-//       </label>`;
-//           })
-//           .join('')}
-//       </fieldset>
-//       <button type='submit'>Submit</button>
-//     </form>
-//   </section>;
-
-// $('form').submit(function(e) {
-//   e.preventDefault();
-//   nextQuestion();
-// });
-// }
