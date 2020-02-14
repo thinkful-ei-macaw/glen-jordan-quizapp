@@ -60,7 +60,9 @@ function renderQuestion() {
       store.wrong += 1;
     }
     store.questionNumber += 1;
+
     renderQuestion();
+
     console.log(`correct answer ${store.score}`);
     console.log(`wrong answer ${store.wrong}`);
   });
